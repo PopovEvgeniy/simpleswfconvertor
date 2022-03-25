@@ -66,7 +66,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 0.4';
+ Form1.Caption:='Simple swf convertor 0.5';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -114,11 +114,13 @@ end;
 
 function compile_flash_movie(source:string):boolean;
 var size,flag:LongWord;
+var status:boolean;
 var movie:string;
 var projector,swf,target:TFileStream;
 begin
  flag:=$FA123456;
- movie:=ExtractFileNameOnly(source)+'.exe';
+ status:=False;
+ movie:=ExtractFilePath(source)+ExtractFileNameOnly(source)+'.exe';
  try
   projector:=TFileStream.Create(get_projector(),fmOpenRead);
   swf:=TFileStream.Create(source,fmOpenRead);
@@ -128,12 +130,13 @@ begin
   size:=swf.Size;
   target.WriteDWord(flag);
   target.WriteDWord(size);
+  status:=True;
  finally
   projector.Free();
   swf.Free();
   target.Free();
  end;
- compile_flash_movie:=FileExists(movie);
+ compile_flash_movie:=status;
 end;
 
 function compile_flash(target:string):string;
@@ -157,12 +160,12 @@ end;
 procedure TForm1.LabeledEdit1Change(Sender: TObject);
 begin
  Form1.Button2.Enabled:=Form1.LabeledEdit1.Text<>'';
- Form1.StatusBar1.SimpleText:='Ready';
 end;
 
 procedure TForm1.OpenDialog1CanClose(Sender: TObject; var CanClose: boolean);
 begin
  Form1.LabeledEdit1.Text:=Form1.OpenDialog1.FileName;
+ Form1.StatusBar1.SimpleText:='Ready';
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
