@@ -66,7 +66,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 0.5';
+ Form1.Caption:='Simple swf convertor 0.8';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -114,12 +114,14 @@ end;
 
 function compile_flash_movie(source:string):boolean;
 var size,flag:LongWord;
-var status:boolean;
 var movie:string;
 var projector,swf,target:TFileStream;
 begin
+ projector:=nil;
+ swf:=nil;
+ target:=nil;
  flag:=$FA123456;
- status:=False;
+ size:=0;
  movie:=ExtractFilePath(source)+ExtractFileNameOnly(source)+'.exe';
  try
   projector:=TFileStream.Create(get_projector(),fmOpenRead);
@@ -130,13 +132,13 @@ begin
   size:=swf.Size;
   target.WriteDWord(flag);
   target.WriteDWord(size);
-  status:=True;
- finally
-  projector.Free();
-  swf.Free();
-  target.Free();
+ except
+  size:=0;
  end;
- compile_flash_movie:=status;
+ if projector<>nil then projector.Free();
+ if swf<>nil then swf.Free();
+ if target<>nil then target.Free();
+ compile_flash_movie:=FileExists(movie);
 end;
 
 function compile_flash(target:string):string;
