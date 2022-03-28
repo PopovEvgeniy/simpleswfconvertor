@@ -15,14 +15,20 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Label1: TLabel;
     LabeledEdit1: TLabeledEdit;
     OpenDialog1: TOpenDialog;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     StatusBar1: TStatusBar;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LabeledEdit1Change(Sender: TObject);
     procedure OpenDialog1CanClose(Sender: TObject; var CanClose: boolean);
+    procedure SelectDirectoryDialog1CanClose(Sender: TObject;
+      var CanClose: Boolean);
   private
     { private declarations }
   public
@@ -39,7 +45,9 @@ procedure common_setup();
 procedure language_setup();
 procedure setup();
 function compile_flash_movie(source:string):boolean;
+function batch_compile_flash(directory:string):LongWord;
 function compile_flash(target:string):string;
+function batch_compile(target:string):string;
 
 implementation
 
@@ -66,7 +74,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 0.8';
+ Form1.Caption:='Simple swf convertor 1.3';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -74,6 +82,8 @@ end;
 
 procedure dialog_setup();
 begin
+ Form1.SelectDirectoryDialog1.InitialDir:='';
+ Form1.OpenDialog1.InitialDir:='';
  Form1.OpenDialog1.FileName:='*.swf';
  Form1.OpenDialog1.DefaultExt:='*.swf';
  Form1.OpenDialog1.Filter:='Adobe flash movies|*.swf';
@@ -87,6 +97,8 @@ begin
  Form1.LabeledEdit1.Text:='';
  Form1.LabeledEdit1.LabelPosition:=lpLeft;
  Form1.LabeledEdit1.Enabled:=False;
+ Form1.RadioButton1.Checked:=True;
+ Form1.RadioButton2.Checked:=False;
 end;
 
 procedure common_setup();
@@ -98,11 +110,15 @@ end;
 
 procedure language_setup();
 begin
- Form1.LabeledEdit1.EditLabel.Caption:='Target file';
- Form1.Button1.Caption:='Open';
+ Form1.LabeledEdit1.EditLabel.Caption:='Target';
+ Form1.Button1.Caption:='Set';
  Form1.Button2.Caption:='Convert';
  Form1.OpenDialog1.Title:='Open a Adobe flash movie';
- Form1.StatusBar1.SimpleText:='Please set the target file';
+ Form1.StatusBar1.SimpleText:='Please set the target';
+ Form1.RadioButton1.Caption:='Normal';
+ Form1.RadioButton2.Caption:='Batch';
+ Form1.Label1.Caption:='Mode';
+ Form1.SelectDirectoryDialog1.Title:='Select target directory';
 end;
 
 procedure setup();
@@ -141,6 +157,21 @@ begin
  compile_flash_movie:=FileExists(movie);
 end;
 
+function batch_compile_flash(directory:string):LongWord;
+var amount:LongWord;
+var search:TSearchRec;
+begin
+ amount:=0;
+ if FindFirst(directory+DirectorySeparator+'*.swf',faAnyFile,search)=0 then
+ begin
+  repeat
+   if compile_flash_movie(directory+DirectorySeparator+search.Name)=True then Inc(amount);
+  until FindNext(search)<>0;
+  FindClose(search);
+ end;
+ batch_compile_flash:=amount;
+end;
+
 function compile_flash(target:string):string;
 var status:string;
 begin
@@ -150,6 +181,11 @@ begin
   status:='Operation failed';
  end;
  compile_flash:=status;
+end;
+
+function batch_compile(target:string):string;
+begin
+ batch_compile:='Amount of converted files: '+IntToStr(batch_compile_flash(target));
 end;
 
 { TForm1 }
@@ -170,14 +206,41 @@ begin
  Form1.StatusBar1.SimpleText:='Ready';
 end;
 
+procedure TForm1.SelectDirectoryDialog1CanClose(Sender: TObject;
+  var CanClose: Boolean);
+begin
+ Form1.LabeledEdit1.Text:=Form1.SelectDirectoryDialog1.FileName;
+ Form1.StatusBar1.SimpleText:='Ready';
+end;
+
 procedure TForm1.Button1Click(Sender: TObject);
 begin
- Form1.OpenDialog1.Execute();
+ if Form1.RadioButton1.Checked=True then
+ begin
+  Form1.OpenDialog1.Execute();
+ end
+ else
+ begin
+  Form1.SelectDirectoryDialog1.Execute();
+ end;
+
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
- Form1.StatusBar1.SimpleText:=compile_flash(Form1.LabeledEdit1.Text);
+  Form1.StatusBar1.SimpleText:='Please wait';
+  Form1.Button1.Enabled:=False;
+  Form1.Button2.Enabled:=False;
+ if Form1.RadioButton1.Checked=True then
+ begin
+  Form1.StatusBar1.SimpleText:=compile_flash(Form1.LabeledEdit1.Text);
+ end
+ else
+ begin
+  Form1.StatusBar1.SimpleText:=batch_compile(Form1.LabeledEdit1.Text);
+ end;
+  Form1.Button1.Enabled:=True;
+  Form1.Button2.Enabled:=True;
 end;
 
 {$R *.lfm}

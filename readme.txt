@@ -1,12 +1,12 @@
                                 Simple swf convertor
 
-                                  Version 0.8
+                                  Version 1.3
 
                          This software made by Popov Evgeniy Alekseyevich
 
 System requirement
 
-Windows 2000 or higher for 32 bit system
+Windows XP(Service pack 3) or higher for 32 bit system
 Windows Vista or higher for 64 bit system
 
 Program description
@@ -40,3 +40,7 @@ Change log
 0.5 - Small bug fixed.
 0.6 - Small changes.
 0.7 - 0.8 - Small bug fixed.
+0.9 - User interface was improve.
+1.0 - Batch conversion mode added.
+1.1 - Small bug fixed.
+1.2 - 1.3 - Small changes.
