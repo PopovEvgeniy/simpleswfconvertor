@@ -74,7 +74,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.3';
+ Form1.Caption:='Simple swf convertor 1.4';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -138,7 +138,7 @@ begin
  target:=nil;
  flag:=$FA123456;
  size:=0;
- movie:=ExtractFilePath(source)+ExtractFileNameOnly(source)+'.exe';
+ movie:=ExtractFileNameWithoutExt(source)+'.exe';
  try
   projector:=TFileStream.Create(get_projector(),fmOpenRead);
   swf:=TFileStream.Create(source,fmOpenRead);
