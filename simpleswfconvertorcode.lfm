@@ -7,7 +7,7 @@ object Form1: TForm1
   ClientHeight = 172
   ClientWidth = 449
   OnCreate = FormCreate
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.2.0'
   object LabeledEdit1: TLabeledEdit
     Left = 96
     Height = 23
@@ -16,6 +16,7 @@ object Form1: TForm1
     EditLabel.Height = 15
     EditLabel.Width = 248
     EditLabel.Caption = 'Target'
+    EditLabel.ParentColor = False
     TabOrder = 0
     Text = 'LabeledEdit1'
     OnChange = LabeledEdit1Change
@@ -51,6 +52,7 @@ object Form1: TForm1
     Top = 64
     Width = 31
     Caption = 'Mode'
+    ParentColor = False
   end
   object RadioButton1: TRadioButton
     Left = 160

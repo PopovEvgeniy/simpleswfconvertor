@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.4
+                                  Version 1.5
 
                          This software made by Popov Evgeniy Alekseyevich
 
@@ -18,7 +18,7 @@ Self-played movie is executable file: it combinate built-in player and the Flash
 Prepare for first start
 
 Put executable file of Flash Player Projector to Simple swf convertor directory.
-You can take Flash Player Projector here: http://www.adobe.com/support/flashplayer/downloads.html
+You can take Flash Player Projector here: https://archive.org/details/adobe-flash-player-projector
 
 License
 
@@ -31,7 +31,7 @@ You can send me a letter to tuzik87@inbox.ru
 About program modification
 
 Source code is included in source.zip archive.
-It can be compiled under Lazarus 2.2 or higher.
+It can be compiled under Lazarus 2.2.2 or higher.
 
 Change log
 
@@ -43,4 +43,4 @@ Change log
 0.9 - User interface was improve.
 1.0 - Batch conversion mode added.
 1.1 - Small bug fixed.
-1.2 - 1.4 - Small changes.
+1.2 - 1.5 - Small changes.

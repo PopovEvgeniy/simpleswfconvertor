@@ -36,18 +36,6 @@ type
   end; 
 
 var Form1: TForm1;
-function get_projector(): string;
-procedure check_projector();
-procedure window_setup();
-procedure dialog_setup();
-procedure interface_setup();
-procedure common_setup();
-procedure language_setup();
-procedure setup();
-function compile_flash_movie(source:string):boolean;
-function batch_compile_flash(directory:string):LongWord;
-function compile_flash(target:string):string;
-function batch_compile(target:string):string;
 
 implementation
 
@@ -64,7 +52,7 @@ begin
  begin
   if MessageDlg(Application.Title,'Flash player projector not found. Do you want open download page?',mtConfirmation,mbYesNo,0)=mrYes then
   begin
-   OpenDocument('http://www.adobe.com/support/flashplayer/downloads.html');
+   OpenDocument('https://archive.org/details/adobe-flash-player-projector');
   end;
 
  end;
@@ -74,7 +62,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.4';
+ Form1.Caption:='Simple swf convertor 1.5';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
