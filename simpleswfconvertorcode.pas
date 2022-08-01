@@ -15,11 +15,9 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
-    Label1: TLabel;
+    CheckBox1: TCheckBox;
     LabeledEdit1: TLabeledEdit;
     OpenDialog1: TOpenDialog;
-    RadioButton1: TRadioButton;
-    RadioButton2: TRadioButton;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     StatusBar1: TStatusBar;
     procedure Button1Click(Sender: TObject);
@@ -62,7 +60,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.5';
+ Form1.Caption:='Simple swf convertor 1.6';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -85,8 +83,7 @@ begin
  Form1.LabeledEdit1.Text:='';
  Form1.LabeledEdit1.LabelPosition:=lpLeft;
  Form1.LabeledEdit1.Enabled:=False;
- Form1.RadioButton1.Checked:=True;
- Form1.RadioButton2.Checked:=False;
+ Form1.CheckBox1.Checked:=False;
 end;
 
 procedure common_setup();
@@ -103,9 +100,7 @@ begin
  Form1.Button2.Caption:='Convert';
  Form1.OpenDialog1.Title:='Open a Adobe flash movie';
  Form1.StatusBar1.SimpleText:='Please set the target';
- Form1.RadioButton1.Caption:='Normal';
- Form1.RadioButton2.Caption:='Batch';
- Form1.Label1.Caption:='Mode';
+ Form1.CheckBox1.Caption:='Batch mode';
  Form1.SelectDirectoryDialog1.Title:='Select target directory';
 end;
 
@@ -203,13 +198,13 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
- if Form1.RadioButton1.Checked=True then
+ if Form1.CheckBox1.Checked=True then
  begin
-  Form1.OpenDialog1.Execute();
+  Form1.SelectDirectoryDialog1.Execute();
  end
  else
  begin
-  Form1.SelectDirectoryDialog1.Execute();
+  Form1.OpenDialog1.Execute();
  end;
 
 end;
@@ -219,13 +214,13 @@ begin
   Form1.StatusBar1.SimpleText:='Please wait';
   Form1.Button1.Enabled:=False;
   Form1.Button2.Enabled:=False;
- if Form1.RadioButton1.Checked=True then
+ if Form1.CheckBox1.Checked=True then
  begin
-  Form1.StatusBar1.SimpleText:=compile_flash(Form1.LabeledEdit1.Text);
+  Form1.StatusBar1.SimpleText:=batch_compile(Form1.LabeledEdit1.Text);
  end
  else
  begin
-  Form1.StatusBar1.SimpleText:=batch_compile(Form1.LabeledEdit1.Text);
+  Form1.StatusBar1.SimpleText:=compile_flash(Form1.LabeledEdit1.Text);
  end;
   Form1.Button1.Enabled:=True;
   Form1.Button2.Enabled:=True;
