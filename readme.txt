@@ -1,19 +1,19 @@
                                 Simple swf convertor
 
-                                  Version 1.6
+                                  Version 1.6.0.1
 
                          This software made by Popov Evgeniy Alekseyevich
 
 System requirement
 
-Windows XP(Service pack 3) or higher for 32 bit system
-Windows Vista or higher for 64 bit system
+Windows XP(Service pack 3) or higher for 32-bit system
+Windows Vista or higher for 64-bit system
 
 Program description
 
-Simple swf convertor is power tool with simple interface.
+Simple swf convertor is a power tool with simple interface.
 It let you convert an Adobe flash movie to stand-alone self-played movie.
-Self-played movie is executable file: it combinate built-in player and the Flash movie in one file.
+Self-played movie is an executable file: it combinate built-in player and the Flash movie in one file.
 
 Prepare for first start
 
@@ -45,3 +45,4 @@ Change log
 1.1 - Small bug fixed.
 1.2 - 1.5 - Small changes.
 1.6 - User interface improved.
+1.6.0.1 - Documentation updated.
