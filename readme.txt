@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.6.0.3
+                                  Version 1.6.1
 
                          This software made by Popov Evgeniy Alekseyevich
 
@@ -46,3 +46,4 @@ Change log
 1.2 - 1.5 - Small changes.
 1.6 - User interface improved.
 1.6.0.1 - 1.6.0.3 - Documentation updated.
+1.6.1 - Small changes.

@@ -60,7 +60,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.6';
+ Form1.Caption:='Simple swf convertor 1.6.1';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -86,13 +86,6 @@ begin
  Form1.CheckBox1.Checked:=False;
 end;
 
-procedure common_setup();
-begin
- window_setup();
- interface_setup();
- dialog_setup();
-end;
-
 procedure language_setup();
 begin
  Form1.LabeledEdit1.EditLabel.Caption:='Target';
@@ -106,7 +99,9 @@ end;
 
 procedure setup();
 begin
- common_setup();
+ window_setup();
+ interface_setup();
+ dialog_setup();
  language_setup();
  check_projector();
 end;
