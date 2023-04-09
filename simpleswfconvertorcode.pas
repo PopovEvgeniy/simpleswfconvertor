@@ -5,7 +5,7 @@ unit simpleswfconvertorcode;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Dialogs,
+  Classes, SysUtils, Forms, Controls, Dialogs,
   ExtCtrls, StdCtrls, ComCtrls, LazFileUtils ,LCLIntf;
 
 type
@@ -60,7 +60,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.6.1';
+ Form1.Caption:='Simple swf convertor 1.6.2';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -106,7 +106,7 @@ begin
  check_projector();
 end;
 
-function compile_flash_movie(source:string):boolean;
+function compile_flash_movie(const source:string):boolean;
 var size,flag:LongWord;
 var movie:string;
 var projector,swf,target:TFileStream;
@@ -135,7 +135,7 @@ begin
  compile_flash_movie:=FileExists(movie);
 end;
 
-function batch_compile_flash(directory:string):LongWord;
+function batch_compile_flash(const directory:string):LongWord;
 var amount:LongWord;
 var search:TSearchRec;
 begin
@@ -150,7 +150,7 @@ begin
  batch_compile_flash:=amount;
 end;
 
-function compile_flash(target:string):string;
+function compile_flash(const target:string):string;
 var status:string;
 begin
  status:='Operation was successfully complete';
@@ -161,7 +161,7 @@ begin
  compile_flash:=status;
 end;
 
-function batch_compile(target:string):string;
+function batch_compile(const target:string):string;
 begin
  batch_compile:='Amount of converted files: '+IntToStr(batch_compile_flash(target));
 end;
