@@ -24,9 +24,6 @@ type
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LabeledEdit1Change(Sender: TObject);
-    procedure OpenDialog1CanClose(Sender: TObject; var CanClose: boolean);
-    procedure SelectDirectoryDialog1CanClose(Sender: TObject;
-      var CanClose: Boolean);
   private
     { private declarations }
   public
@@ -60,7 +57,7 @@ end;
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.6.2';
+ Form1.Caption:='Simple swf convertor 1.6.6';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -68,6 +65,7 @@ end;
 
 procedure dialog_setup();
 begin
+ Form1.SelectDirectoryDialog1.Options:=[ofOldStyleDialog,ofEnableSizing,ofViewDetail];
  Form1.SelectDirectoryDialog1.InitialDir:='';
  Form1.OpenDialog1.InitialDir:='';
  Form1.OpenDialog1.FileName:='*.swf';
@@ -78,7 +76,7 @@ end;
 procedure interface_setup();
 begin
  Form1.Button1.ShowHint:=False;
- Form1.Button2.ShowHint:=Form1.Button1.ShowHint;
+ Form1.Button2.ShowHint:=False;
  Form1.Button2.Enabled:=False;
  Form1.LabeledEdit1.Text:='';
  Form1.LabeledEdit1.LabelPosition:=lpLeft;
@@ -175,31 +173,23 @@ end;
 
 procedure TForm1.LabeledEdit1Change(Sender: TObject);
 begin
- Form1.Button2.Enabled:=Form1.LabeledEdit1.Text<>'';
-end;
+ if Form1.LabeledEdit1.Text<>'' then
+ begin
+  Form1.Button2.Enabled:=True;
+  Form1.StatusBar1.SimpleText:='Ready';
+ end;
 
-procedure TForm1.OpenDialog1CanClose(Sender: TObject; var CanClose: boolean);
-begin
- Form1.LabeledEdit1.Text:=Form1.OpenDialog1.FileName;
- Form1.StatusBar1.SimpleText:='Ready';
-end;
-
-procedure TForm1.SelectDirectoryDialog1CanClose(Sender: TObject;
-  var CanClose: Boolean);
-begin
- Form1.LabeledEdit1.Text:=Form1.SelectDirectoryDialog1.FileName;
- Form1.StatusBar1.SimpleText:='Ready';
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
  if Form1.CheckBox1.Checked=True then
  begin
-  Form1.SelectDirectoryDialog1.Execute();
+  if Form1.SelectDirectoryDialog1.Execute()=True then Form1.LabeledEdit1.Text:=Form1.SelectDirectoryDialog1.FileName;
  end
  else
  begin
-  Form1.OpenDialog1.Execute();
+  if Form1.OpenDialog1.Execute()=True then Form1.LabeledEdit1.Text:=Form1.OpenDialog1.FileName;
  end;
 
 end;
