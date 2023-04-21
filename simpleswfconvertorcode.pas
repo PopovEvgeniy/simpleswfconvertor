@@ -34,30 +34,10 @@ var Form1: TForm1;
 
 implementation
 
-function get_projector(): string;
-begin
- get_projector:=ExtractFilePath(ParamStr(0))+'flashplayer_32_sa.exe';
-end;
-
-procedure check_projector();
-var target:string;
-begin
- target:=get_projector();
- if FileExists(target)=False then
- begin
-  if MessageDlg(Application.Title,'Flash player projector not found. Do you want open download page?',mtConfirmation,mbYesNo,0)=mrYes then
-  begin
-   OpenDocument('https://archive.org/details/adobe-flash-player-projector');
-  end;
-
- end;
-
-end;
-
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.6.6';
+ Form1.Caption:='Simple swf convertor 1.6.8';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -65,7 +45,6 @@ end;
 
 procedure dialog_setup();
 begin
- Form1.SelectDirectoryDialog1.Options:=[ofOldStyleDialog,ofEnableSizing,ofViewDetail];
  Form1.SelectDirectoryDialog1.InitialDir:='';
  Form1.OpenDialog1.InitialDir:='';
  Form1.OpenDialog1.FileName:='*.swf';
@@ -93,6 +72,26 @@ begin
  Form1.StatusBar1.SimpleText:='Please set the target';
  Form1.CheckBox1.Caption:='Batch mode';
  Form1.SelectDirectoryDialog1.Title:='Select target directory';
+end;
+
+function get_projector(): string;
+begin
+ get_projector:=ExtractFilePath(ParamStr(0))+'flashplayer_32_sa.exe';
+end;
+
+procedure check_projector();
+var target:string;
+begin
+ target:=get_projector();
+ if FileExists(target)=False then
+ begin
+  if MessageDlg(Application.Title,'Flash player projector not found. Do you want open download page?',mtConfirmation,mbYesNo,0)=mrYes then
+  begin
+   OpenDocument('https://archive.org/details/adobe-flash-player-projector');
+  end;
+
+ end;
+
 end;
 
 procedure setup();
@@ -148,20 +147,19 @@ begin
  batch_compile_flash:=amount;
 end;
 
-function compile_flash(const target:string):string;
+function do_job(const target:string;const batch:boolean): string;
 var status:string;
 begin
  status:='Operation was successfully complete';
- if compile_flash_movie(target)=False then
+ if batch=False then
  begin
-  status:='Operation failed';
+  if compile_flash_movie(target)=False then status:='Operation failed';
+ end
+ else
+ begin
+  status:='Amount of converted files: '+IntToStr(batch_compile_flash(target));
  end;
- compile_flash:=status;
-end;
-
-function batch_compile(const target:string):string;
-begin
- batch_compile:='Amount of converted files: '+IntToStr(batch_compile_flash(target));
+ do_job:=status;
 end;
 
 { TForm1 }
@@ -199,14 +197,7 @@ begin
   Form1.StatusBar1.SimpleText:='Please wait';
   Form1.Button1.Enabled:=False;
   Form1.Button2.Enabled:=False;
- if Form1.CheckBox1.Checked=True then
- begin
-  Form1.StatusBar1.SimpleText:=batch_compile(Form1.LabeledEdit1.Text);
- end
- else
- begin
-  Form1.StatusBar1.SimpleText:=compile_flash(Form1.LabeledEdit1.Text);
- end;
+  Form1.StatusBar1.SimpleText:=do_job(Form1.LabeledEdit1.Text,Form1.CheckBox1.Checked);
   Form1.Button1.Enabled:=True;
   Form1.Button2.Enabled:=True;
 end;

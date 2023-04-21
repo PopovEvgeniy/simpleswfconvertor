@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.6.6
+                                  Version 1.6.8
 
                          This software made by Popov Evgeniy Alekseyevich
 
@@ -19,6 +19,11 @@ Prepare for first start
 
 Put the executable file of Flash Player Projector to Simple swf convertor directory.
 You can take Flash Player Projector here: https://archive.org/details/adobe-flash-player-projector
+
+Working modes
+
+The normal mode intends for processing single flash movie.
+The batch mode intends for processing all flash movies in target directory.
 
 License
 
@@ -48,4 +53,4 @@ Change log
 1.6.0.1 - 1.6.0.3 - Documentation updated.
 1.6.1 - 1.6.2 - Small changes.
 1.6.3 - Small bug fixed.
-1.6.4 - 1.6.6 - Small changes.
+1.6.4 - 1.6.8 - Small changes.
