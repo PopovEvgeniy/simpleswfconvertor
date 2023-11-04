@@ -37,7 +37,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.6.8';
+ Form1.Caption:='Simple swf convertor 1.7.1';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -132,15 +132,34 @@ begin
  compile_flash_movie:=FileExists(movie);
 end;
 
+function is_valid_directory(var search:TSearchRec):boolean;
+begin
+ is_valid_directory:=((search.Attr and faDirectory)<>0) and (search.Name<>'.') and (search.Name<>'..');
+end;
+
+function is_valid_file(var search:TSearchRec):boolean;
+begin
+ is_valid_file:=((search.Attr and faDirectory)=0) and (ExtractFileExt(search.Name)='.swf');
+end;
+
 function batch_compile_flash(const directory:string):LongWord;
+var target:string;
 var amount:LongWord;
 var search:TSearchRec;
 begin
  amount:=0;
- if FindFirst(directory+DirectorySeparator+'*.swf',faAnyFile,search)=0 then
+ if FindFirst(directory+DirectorySeparator+'*.*',faAnyFile,search)=0 then
  begin
   repeat
-   if compile_flash_movie(directory+DirectorySeparator+search.Name)=True then Inc(amount);
+   target:=directory+DirectorySeparator+search.Name;
+   if is_valid_file(search)=True then
+   begin
+    if compile_flash_movie(target)=True then Inc(amount);
+   end;
+   if is_valid_directory(search)=True then
+   begin
+    amount:=amount+batch_compile_flash(target);
+   end;
   until FindNext(search)<>0;
   FindClose(search);
  end;

@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.6.8
+                                  Version 1.7.1
 
                          This software made by Popov Evgeniy Alekseyevich
 
@@ -23,7 +23,7 @@ You can take Flash Player Projector here: https://archive.org/details/adobe-flas
 Working modes
 
 The normal mode intends for processing single flash movie.
-The batch mode intends for processing all flash movies in target directory.
+The batch mode intends for processing all flash movies in target directory and all subdirectories of target directory.
 
 License
 
@@ -36,7 +36,7 @@ You can send me a letter to tuzik87@inbox.ru
 About program modification
 
 Source code included in source.zip archive.
-It can be compiled under Lazarus 2.2.6 or higher.
+It can be compiled under Lazarus 3.0 RC2 or higher.
 
 Change log
 
@@ -53,4 +53,6 @@ Change log
 1.6.0.1 - 1.6.0.3 - Documentation updated.
 1.6.1 - 1.6.2 - Small changes.
 1.6.3 - Small bug fixed.
-1.6.4 - 1.6.8 - Small changes.
+1.6.4 - 1.6.9 - Small changes.
+1.7 - File processing improved.
+1.7.1 - Small bug fixed.
