@@ -16,6 +16,7 @@ type
     Button1: TButton;
     Button2: TButton;
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     LabeledEdit1: TLabeledEdit;
     OpenDialog1: TOpenDialog;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
@@ -37,7 +38,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.7.1';
+ Form1.Caption:='Simple swf convertor 1.7.2';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -61,6 +62,7 @@ begin
  Form1.LabeledEdit1.LabelPosition:=lpLeft;
  Form1.LabeledEdit1.Enabled:=False;
  Form1.CheckBox1.Checked:=False;
+ Form1.CheckBox2.Checked:=False;
 end;
 
 procedure language_setup();
@@ -71,6 +73,7 @@ begin
  Form1.OpenDialog1.Title:='Open a Adobe flash movie';
  Form1.StatusBar1.SimpleText:='Please set the target';
  Form1.CheckBox1.Caption:='Batch mode';
+ Form1.CheckBox2.Caption:='Delete source Adobe Flash movie after conversion';
  Form1.SelectDirectoryDialog1.Title:='Select target directory';
 end;
 
@@ -103,7 +106,7 @@ begin
  check_projector();
 end;
 
-function compile_flash_movie(const source:string):boolean;
+function compile_flash_movie(const source:string;const delete_source:boolean):boolean;
 var size,flag:LongWord;
 var movie:string;
 var projector,swf,target:TFileStream;
@@ -124,11 +127,15 @@ begin
   target.WriteDWord(flag);
   target.WriteDWord(size);
  except
-  size:=0;
+  ;
  end;
  if projector<>nil then projector.Free();
- if swf<>nil then swf.Free();
  if target<>nil then target.Free();
+ if swf<>nil then
+ begin
+  swf.Free();
+  if delete_source=True then DeleteFile(source);
+ end;
  compile_flash_movie:=FileExists(movie);
 end;
 
@@ -142,7 +149,7 @@ begin
  is_valid_file:=((search.Attr and faDirectory)=0) and (ExtractFileExt(search.Name)='.swf');
 end;
 
-function batch_compile_flash(const directory:string):LongWord;
+function batch_compile_flash(const directory:string;const delete_source:boolean):LongWord;
 var target:string;
 var amount:LongWord;
 var search:TSearchRec;
@@ -154,11 +161,11 @@ begin
    target:=directory+DirectorySeparator+search.Name;
    if is_valid_file(search)=True then
    begin
-    if compile_flash_movie(target)=True then Inc(amount);
+    if compile_flash_movie(target,delete_source)=True then Inc(amount);
    end;
    if is_valid_directory(search)=True then
    begin
-    amount:=amount+batch_compile_flash(target);
+    amount:=amount+batch_compile_flash(target,delete_source);
    end;
   until FindNext(search)<>0;
   FindClose(search);
@@ -166,17 +173,17 @@ begin
  batch_compile_flash:=amount;
 end;
 
-function do_job(const target:string;const batch:boolean): string;
+function do_job(const target:string;const batch:boolean;const delete_source:boolean):string;
 var status:string;
 begin
  status:='Operation was successfully complete';
  if batch=False then
  begin
-  if compile_flash_movie(target)=False then status:='Operation failed';
+  if compile_flash_movie(target,delete_source)=False then status:='Operation failed';
  end
  else
  begin
-  status:='Amount of converted files: '+IntToStr(batch_compile_flash(target));
+  status:='Amount of converted files: '+IntToStr(batch_compile_flash(target,delete_source));
  end;
  do_job:=status;
 end;
@@ -216,7 +223,7 @@ begin
   Form1.StatusBar1.SimpleText:='Please wait';
   Form1.Button1.Enabled:=False;
   Form1.Button2.Enabled:=False;
-  Form1.StatusBar1.SimpleText:=do_job(Form1.LabeledEdit1.Text,Form1.CheckBox1.Checked);
+  Form1.StatusBar1.SimpleText:=do_job(Form1.LabeledEdit1.Text,Form1.CheckBox1.Checked,Form1.CheckBox2.Checked);
   Form1.Button1.Enabled:=True;
   Form1.Button2.Enabled:=True;
 end;

@@ -72,7 +72,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="4"/>
         <CursorPos Y="19"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="27"/>
       </Unit0>
       <Unit1>
         <Filename Value="simpleswfconvertorcode.pas"/>
@@ -81,14 +81,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="132"/>
-        <CursorPos X="48" Y="142"/>
-        <UsageCount Value="26"/>
+        <TopLine Value="161"/>
+        <CursorPos X="60" Y="168"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
     </Units>
-    <JumpHistory Count="15" HistoryIndex="14">
+    <JumpHistory Count="17" HistoryIndex="16">
       <Position1>
         <Filename Value="simpleswfconvertorcode.pas"/>
         <Caret Line="121" Column="24" TopLine="113"/>
@@ -149,6 +149,14 @@
         <Filename Value="simpleswfconvertorcode.pas"/>
         <Caret Line="81" Column="5" TopLine="72"/>
       </Position15>
+      <Position16>
+        <Filename Value="simpleswfconvertorcode.pas"/>
+        <Caret Line="40" Column="44" TopLine="36"/>
+      </Position16>
+      <Position17>
+        <Filename Value="simpleswfconvertorcode.pas"/>
+        <Caret Line="226" Column="102" TopLine="127"/>
+      </Position17>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
