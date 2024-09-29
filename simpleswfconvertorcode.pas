@@ -38,7 +38,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.7.2';
+ Form1.Caption:='Simple swf convertor 1.7.3';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -70,11 +70,11 @@ begin
  Form1.LabeledEdit1.EditLabel.Caption:='Target';
  Form1.Button1.Caption:='Set';
  Form1.Button2.Caption:='Convert';
- Form1.OpenDialog1.Title:='Open a Adobe flash movie';
+ Form1.OpenDialog1.Title:='Open an Adobe flash movie';
  Form1.StatusBar1.SimpleText:='Please set the target';
  Form1.CheckBox1.Caption:='Batch mode';
- Form1.CheckBox2.Caption:='Delete source Adobe Flash movie after conversion';
- Form1.SelectDirectoryDialog1.Title:='Select target directory';
+ Form1.CheckBox2.Caption:='Delete a source movie after conversion';
+ Form1.SelectDirectoryDialog1.Title:='Select the target directory';
 end;
 
 function get_projector(): string;
@@ -88,9 +88,9 @@ begin
  target:=get_projector();
  if FileExists(target)=False then
  begin
-  if MessageDlg(Application.Title,'Flash player projector not found. Do you want open download page?',mtConfirmation,mbYesNo,0)=mrYes then
+  if MessageDlg(Application.Title,'The Flash Player Projector was not found. Do you want to open the download page?',mtConfirmation,mbYesNo,0)=mrYes then
   begin
-   OpenDocument('https://archive.org/details/adobe-flash-player-projector');
+   OpenDocument('https://archive.org/details/flashplayer_32_sa_202107');
   end;
 
  end;
@@ -176,14 +176,14 @@ end;
 function do_job(const target:string;const batch:boolean;const delete_source:boolean):string;
 var status:string;
 begin
- status:='Operation was successfully complete';
+ status:='Operation was successfully completed';
  if batch=False then
  begin
-  if compile_flash_movie(target,delete_source)=False then status:='Operation failed';
+  if compile_flash_movie(target,delete_source)=False then status:='Operation was failed';
  end
  else
  begin
-  status:='Amount of converted files: '+IntToStr(batch_compile_flash(target,delete_source));
+  status:='Amount of the converted files: '+IntToStr(batch_compile_flash(target,delete_source));
  end;
  do_job:=status;
 end;
