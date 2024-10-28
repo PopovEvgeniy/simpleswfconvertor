@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.7.3.1
+                                  Version 1.7.3.2
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -42,21 +42,21 @@ Change log
 
 0.1: Initial version.
 0.2-0.4: The small changes.
-0.5: A small bug is fixed.
+0.5: A small bug has been fixed.
 0.6: The small changes.
-0.7-0.8: A small bug is fixed.
-0.9: The user interface improved.
+0.7-0.8: A small bug has been fixed.
+0.9: The user interface has improved.
 1.0: The batch conversion mode has been added.
-1.1: A small bug is fixed.
+1.1: A small bug has been fixed.
 1.2-1.5: The small changes.
-1.6: The user interface improved.
-1.6.0.1-1.6.0.3: Documentation updated.
+1.6: The user interface has improved.
+1.6.0.1-1.6.0.3: The documentation updated.
 1.6.1-1.6.2: The small changes.
-1.6.3: A small bug is fixed.
+1.6.3: A small bug has been fixed.
 1.6.4-1.6.9: The small changes.
-1.7: The file processing improved.
-1.7.1: A small bug is fixed.
-1.7.2: The user interface improved.
-1.7.2.1: Documentation updated.
+1.7: The file processing has improved.
+1.7.1: A small bug has been fixed.
+1.7.2: The user interface has improved.
+1.7.2.1: The documentation updated.
 1.7.3: The small changes.
-1.7.3.1: Documentation updated.
+1.7.3.1-1.7.3.2: The documentation updated.
