@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.7.3.2
+                                  Version 1.7.4
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -36,7 +36,7 @@ You can send me a letter at tuzik87@inbox.ru.
 About program modification
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 3.4 or higher.
+It can be compiled under Lazarus 4.0 RC1 or higher.
 
 Change log
 
@@ -60,3 +60,4 @@ Change log
 1.7.2.1: The documentation updated.
 1.7.3: The small changes.
 1.7.3.1-1.7.3.2: The documentation updated.
+1.7.4: The source code was recompiled under Lazarus 4.0 RC1.

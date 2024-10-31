@@ -38,7 +38,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.7.3';
+ Form1.Caption:='Simple swf convertor 1.7.4';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
