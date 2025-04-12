@@ -10,71 +10,71 @@ uses
 
 type
 
-  { TForm1 }
+  { TMainWindow }
 
-  TForm1 = class(TForm)
-    Button1: TButton;
-    Button2: TButton;
-    CheckBox1: TCheckBox;
-    CheckBox2: TCheckBox;
-    LabeledEdit1: TLabeledEdit;
-    OpenDialog1: TOpenDialog;
-    SelectDirectoryDialog1: TSelectDirectoryDialog;
-    StatusBar1: TStatusBar;
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+  TMainWindow = class(TForm)
+    SetButton: TButton;
+    ConvertButton: TButton;
+    BatchCheckBox: TCheckBox;
+    DeleteCheckBox: TCheckBox;
+    TargetField: TLabeledEdit;
+    OpenDialog: TOpenDialog;
+    SelectDirectoryDialog: TSelectDirectoryDialog;
+    OperationStatus: TStatusBar;
+    procedure SetButtonClick(Sender: TObject);
+    procedure ConvertButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure LabeledEdit1Change(Sender: TObject);
+    procedure TargetFieldChange(Sender: TObject);
   private
     { private declarations }
   public
     { public declarations }
   end; 
 
-var Form1: TForm1;
+var MainWindow: TMainWindow;
 
 implementation
 
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- Form1.Caption:='Simple swf convertor 1.7.4';
- Form1.BorderStyle:=bsDialog;
- Form1.Font.Name:=Screen.MenuFont.Name;
- Form1.Font.Size:=14;
+ MainWindow.Caption:='Simple swf convertor 1.7.5';
+ MainWindow.BorderStyle:=bsDialog;
+ MainWindow.Font.Name:=Screen.MenuFont.Name;
+ MainWindow.Font.Size:=14;
 end;
 
 procedure dialog_setup();
 begin
- Form1.SelectDirectoryDialog1.InitialDir:='';
- Form1.OpenDialog1.InitialDir:='';
- Form1.OpenDialog1.FileName:='*.swf';
- Form1.OpenDialog1.DefaultExt:='*.swf';
- Form1.OpenDialog1.Filter:='Adobe flash movies|*.swf';
+ MainWindow.SelectDirectoryDialog.InitialDir:='';
+ MainWindow.OpenDialog.InitialDir:='';
+ MainWindow.OpenDialog.FileName:='*.swf';
+ MainWindow.OpenDialog.DefaultExt:='*.swf';
+ MainWindow.OpenDialog.Filter:='Adobe flash movies|*.swf';
 end;
 
 procedure interface_setup();
 begin
- Form1.Button1.ShowHint:=False;
- Form1.Button2.ShowHint:=False;
- Form1.Button2.Enabled:=False;
- Form1.LabeledEdit1.Text:='';
- Form1.LabeledEdit1.LabelPosition:=lpLeft;
- Form1.LabeledEdit1.Enabled:=False;
- Form1.CheckBox1.Checked:=False;
- Form1.CheckBox2.Checked:=False;
+ MainWindow.SetButton.ShowHint:=False;
+ MainWindow.ConvertButton.ShowHint:=False;
+ MainWindow.ConvertButton.Enabled:=False;
+ MainWindow.TargetField.Text:='';
+ MainWindow.TargetField.LabelPosition:=lpLeft;
+ MainWindow.TargetField.Enabled:=False;
+ MainWindow.BatchCheckBox.Checked:=False;
+ MainWindow.DeleteCheckBox.Checked:=False;
 end;
 
 procedure language_setup();
 begin
- Form1.LabeledEdit1.EditLabel.Caption:='Target';
- Form1.Button1.Caption:='Set';
- Form1.Button2.Caption:='Convert';
- Form1.OpenDialog1.Title:='Open an Adobe flash movie';
- Form1.StatusBar1.SimpleText:='Please set the target';
- Form1.CheckBox1.Caption:='Batch mode';
- Form1.CheckBox2.Caption:='Delete a source movie after conversion';
- Form1.SelectDirectoryDialog1.Title:='Select the target directory';
+ MainWindow.TargetField.EditLabel.Caption:='Target';
+ MainWindow.SetButton.Caption:='Set';
+ MainWindow.ConvertButton.Caption:='Convert';
+ MainWindow.OpenDialog.Title:='Open an Adobe flash movie';
+ MainWindow.OperationStatus.SimpleText:='Please set the target';
+ MainWindow.BatchCheckBox.Caption:='Batch mode';
+ MainWindow.DeleteCheckBox.Caption:='Delete a source movie after conversion';
+ MainWindow.SelectDirectoryDialog.Title:='Select the target directory';
 end;
 
 function get_projector(): string;
@@ -90,7 +90,7 @@ begin
  begin
   if MessageDlg(Application.Title,'The Flash Player Projector was not found. Do you want to open the download page?',mtConfirmation,mbYesNo,0)=mrYes then
   begin
-   OpenDocument('https://archive.org/details/flashplayer_32_sa_202107');
+   OpenDocument('https://archive.org/details/flash-projectors');
   end;
 
  end;
@@ -188,44 +188,44 @@ begin
  do_job:=status;
 end;
 
-{ TForm1 }
+{ TMainWindow }
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TMainWindow.FormCreate(Sender: TObject);
 begin
  setup();
 end;
 
-procedure TForm1.LabeledEdit1Change(Sender: TObject);
+procedure TMainWindow.TargetFieldChange(Sender: TObject);
 begin
- if Form1.LabeledEdit1.Text<>'' then
+ if MainWindow.TargetField.Text<>'' then
  begin
-  Form1.Button2.Enabled:=True;
-  Form1.StatusBar1.SimpleText:='Ready';
+  MainWindow.ConvertButton.Enabled:=True;
+  MainWindow.OperationStatus.SimpleText:='Ready';
  end;
 
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TMainWindow.SetButtonClick(Sender: TObject);
 begin
- if Form1.CheckBox1.Checked=True then
+ if MainWindow.BatchCheckBox.Checked=True then
  begin
-  if Form1.SelectDirectoryDialog1.Execute()=True then Form1.LabeledEdit1.Text:=Form1.SelectDirectoryDialog1.FileName;
+  if MainWindow.SelectDirectoryDialog.Execute()=True then MainWindow.TargetField.Text:=MainWindow.SelectDirectoryDialog.FileName;
  end
  else
  begin
-  if Form1.OpenDialog1.Execute()=True then Form1.LabeledEdit1.Text:=Form1.OpenDialog1.FileName;
+  if MainWindow.OpenDialog.Execute()=True then MainWindow.TargetField.Text:=MainWindow.OpenDialog.FileName;
  end;
 
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TMainWindow.ConvertButtonClick(Sender: TObject);
 begin
-  Form1.StatusBar1.SimpleText:='Please wait';
-  Form1.Button1.Enabled:=False;
-  Form1.Button2.Enabled:=False;
-  Form1.StatusBar1.SimpleText:=do_job(Form1.LabeledEdit1.Text,Form1.CheckBox1.Checked,Form1.CheckBox2.Checked);
-  Form1.Button1.Enabled:=True;
-  Form1.Button2.Enabled:=True;
+  MainWindow.OperationStatus.SimpleText:='Please wait';
+  MainWindow.SetButton.Enabled:=False;
+  MainWindow.ConvertButton.Enabled:=False;
+  MainWindow.OperationStatus.SimpleText:=do_job(MainWindow.TargetField.Text,MainWindow.BatchCheckBox.Checked,MainWindow.DeleteCheckBox.Checked);
+  MainWindow.SetButton.Enabled:=True;
+  MainWindow.ConvertButton.Enabled:=True;
 end;
 
 {$R *.lfm}

@@ -1,73 +1,72 @@
-object Form1: TForm1
+object MainWindow: TMainWindow
   Left = 524
   Height = 194
   Top = 270
   Width = 460
-  Caption = 'Form1'
+  Caption = 'Simple swf convertor'
   ClientHeight = 194
   ClientWidth = 460
-  LCLVersion = '4.0.0.1'
   OnCreate = FormCreate
-  object LabeledEdit1: TLabeledEdit
+  object TargetField: TLabeledEdit
     Left = 72
-    Height = 23
+    Height = 28
     Top = 16
     Width = 296
-    EditLabel.Height = 15
-    EditLabel.Width = 32
+    EditLabel.Height = 28
+    EditLabel.Width = 41
     EditLabel.Caption = 'Target'
     EditLabel.ParentColor = False
     LabelPosition = lpLeft
     TabOrder = 0
-    Text = 'LabeledEdit1'
-    OnChange = LabeledEdit1Change
+    Text = 'TargetField'
+    OnChange = TargetFieldChange
   end
-  object Button1: TButton
+  object SetButton: TButton
     Left = 376
     Height = 25
     Top = 16
     Width = 64
     Caption = 'Set'
     TabOrder = 1
-    OnClick = Button1Click
+    OnClick = SetButtonClick
   end
-  object Button2: TButton
+  object ConvertButton: TButton
     Left = 160
     Height = 25
     Top = 128
     Width = 88
     Caption = 'Start'
     TabOrder = 2
-    OnClick = Button2Click
+    OnClick = ConvertButtonClick
   end
-  object StatusBar1: TStatusBar
+  object OperationStatus: TStatusBar
     Left = 0
     Height = 23
     Top = 171
     Width = 460
     Panels = <>
   end
-  object CheckBox1: TCheckBox
+  object BatchCheckBox: TCheckBox
     Left = 16
-    Height = 19
+    Height = 24
     Top = 56
-    Width = 82
+    Width = 98
     Caption = 'Batch mode'
     TabOrder = 4
   end
-  object CheckBox2: TCheckBox
+  object DeleteCheckBox: TCheckBox
     Left = 16
-    Height = 19
+    Height = 24
     Top = 88
-    Width = 222
+    Width = 276
     Caption = 'Delete a source movie after conversion'
     TabOrder = 5
   end
-  object OpenDialog1: TOpenDialog
+  object OpenDialog: TOpenDialog
     Left = 304
     Top = 120
   end
-  object SelectDirectoryDialog1: TSelectDirectoryDialog
+  object SelectDirectoryDialog: TSelectDirectoryDialog
     Left = 48
     Top = 120
   end
