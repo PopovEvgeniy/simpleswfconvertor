@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.7.5
+                                  Version 1.7.5.1
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -18,7 +18,7 @@ A standalone movie is an executable file. It combines the built-in player and th
 Prepare
 
 Put the executable file of the Flash Player Projector in the Simple swf convertor directory.
-You can take Flash Player Projector here: https://archive.org/details/flash-projectors
+You can take the Flash Player Projector here: https://archive.org/details/flash-projectors
 
 Modes
 
@@ -27,11 +27,7 @@ The batch mode is intended to process all Flash movies in the target directory a
 
 License
 
-This program is distributed under GNU GENERAL PUBLIC LICENSE.
-
-Contact
-
-You can send me a letter at tuzik87@inbox.ru.
+This program is distributed under the GNU GENERAL PUBLIC LICENSE.
 
 About program modification
 
@@ -62,3 +58,4 @@ Change log
 1.7.3.1-1.7.3.2: The documentation has been updated.
 1.7.4: The source code was recompiled under Lazarus 4.0 RC1.
 1.7.5: The source code was recompiled under Lazarus 4.0 RC3.
+1.7.5.1: The documentation has been updated.
