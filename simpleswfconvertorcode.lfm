@@ -6,6 +6,7 @@ object MainWindow: TMainWindow
   Caption = 'Simple swf convertor'
   ClientHeight = 194
   ClientWidth = 460
+  LCLVersion = '4.2.0.0'
   OnCreate = FormCreate
   object TargetField: TLabeledEdit
     Left = 72

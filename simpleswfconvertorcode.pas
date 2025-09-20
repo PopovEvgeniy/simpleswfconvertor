@@ -38,7 +38,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='Simple swf convertor';
- MainWindow.Caption:='Simple swf convertor 1.7.5';
+ MainWindow.Caption:='Simple swf convertor 1.7.6';
  MainWindow.BorderStyle:=bsDialog;
  MainWindow.Font.Name:=Screen.MenuFont.Name;
  MainWindow.Font.Size:=14;
@@ -88,7 +88,7 @@ begin
  target:=get_projector();
  if FileExists(target)=False then
  begin
-  if MessageDlg(Application.Title,'The Flash Player Projector was not found. Do you want to open the download page?',mtConfirmation,mbYesNo,0)=mrYes then
+  if MessageDlg(Application.Title,'The Flash Player projector was not found. Do you want to open the download page?',mtConfirmation,mbYesNo,0)=mrYes then
   begin
    OpenDocument('https://archive.org/details/flash-projectors');
   end;
@@ -176,10 +176,10 @@ end;
 function do_job(const target:string;const batch:boolean;const delete_source:boolean):string;
 var status:string;
 begin
- status:='Operation was successfully completed';
+ status:='The operation was successfully completed';
  if batch=False then
  begin
-  if compile_flash_movie(target,delete_source)=False then status:='Operation was failed';
+  if compile_flash_movie(target,delete_source)=False then status:='The operation was failed';
  end
  else
  begin
