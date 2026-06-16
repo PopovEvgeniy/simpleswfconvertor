@@ -14,7 +14,7 @@
     <i18n>
       <EnableI18N LFM="False"/>
     </i18n>
-    <BuildModes Count="2" Active="Windows 64 bit">
+    <BuildModes Count="2" Active="Windows 32 bit">
       <Item1 Name="Windows 32 bit" Default="True"/>
       <Item2 Name="Windows 64 bit">
         <CompilerOptions>
@@ -38,6 +38,7 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
+              <RunWithoutDebug Value="True"/>
               <UseLineInfoUnit Value="False"/>
             </Debugging>
             <LinkSmart Value="True"/>
@@ -81,129 +82,133 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="73" Y="182"/>
+        <CursorPos X="43" Y="151"/>
         <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="121" Column="24" TopLine="113"/>
+        <Caret Line="135" Column="2" TopLine="130"/>
       </Position1>
       <Position2>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="135" Column="2" TopLine="130"/>
+        <Caret Line="136" Column="2" TopLine="131"/>
       </Position2>
       <Position3>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="136" Column="2" TopLine="131"/>
+        <Caret Line="137" Column="2" TopLine="132"/>
       </Position3>
       <Position4>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="137" Column="2" TopLine="132"/>
+        <Caret Line="94" Column="35" TopLine="63"/>
       </Position4>
       <Position5>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="94" Column="35" TopLine="63"/>
+        <Caret Line="183" Column="2" TopLine="167"/>
       </Position5>
       <Position6>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="183" Column="2" TopLine="167"/>
+        <Caret Line="190" Column="64" TopLine="187"/>
       </Position6>
       <Position7>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="190" Column="64" TopLine="187"/>
+        <Caret Line="55" Column="74" TopLine="50"/>
       </Position7>
       <Position8>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="55" Column="74" TopLine="50"/>
+        <Caret Line="54" Column="74" TopLine="49"/>
       </Position8>
       <Position9>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="54" Column="74" TopLine="49"/>
+        <Caret Line="53" Column="74" TopLine="48"/>
       </Position9>
       <Position10>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="53" Column="74" TopLine="48"/>
+        <Caret Line="52" Column="74" TopLine="47"/>
       </Position10>
       <Position11>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="52" Column="74" TopLine="47"/>
+        <Caret Line="9" Column="45"/>
       </Position11>
       <Position12>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="9" Column="45"/>
+        <Caret Line="194" Column="6" TopLine="183"/>
       </Position12>
       <Position13>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="194" Column="6" TopLine="183"/>
+        <Caret Line="150" TopLine="129"/>
       </Position13>
       <Position14>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="150" TopLine="129"/>
+        <Caret Line="81" Column="5" TopLine="72"/>
       </Position14>
       <Position15>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="81" Column="5" TopLine="72"/>
+        <Caret Line="40" Column="44" TopLine="36"/>
       </Position15>
       <Position16>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="40" Column="44" TopLine="36"/>
+        <Caret Line="226" Column="102" TopLine="127"/>
       </Position16>
       <Position17>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="226" Column="102" TopLine="127"/>
+        <Caret Line="70" Column="13" TopLine="64"/>
       </Position17>
       <Position18>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="70" Column="13" TopLine="64"/>
+        <Caret Line="226" Column="55" TopLine="201"/>
       </Position18>
       <Position19>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="226" Column="55" TopLine="201"/>
+        <Caret Line="74" Column="13" TopLine="65"/>
       </Position19>
       <Position20>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="74" Column="13" TopLine="65"/>
+        <Caret Line="58" Column="13" TopLine="50"/>
       </Position20>
       <Position21>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="58" Column="13" TopLine="50"/>
+        <Caret Line="225" Column="14" TopLine="211"/>
       </Position21>
       <Position22>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="225" Column="14" TopLine="211"/>
+        <Caret Line="75" Column="13" TopLine="62"/>
       </Position22>
       <Position23>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="75" Column="13" TopLine="62"/>
+        <Caret Line="226" Column="121" TopLine="220"/>
       </Position23>
       <Position24>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="226" Column="121" TopLine="220"/>
+        <Caret Line="53" Column="20" TopLine="42"/>
       </Position24>
       <Position25>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="53" Column="20" TopLine="42"/>
+        <Caret Line="77" Column="34" TopLine="71"/>
       </Position25>
       <Position26>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="77" Column="34" TopLine="71"/>
+        <Caret Line="212" Column="120" TopLine="205"/>
       </Position26>
       <Position27>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="212" Column="120" TopLine="205"/>
+        <Caret Line="50" Column="23" TopLine="43"/>
       </Position27>
       <Position28>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="50" Column="23" TopLine="43"/>
+        <Caret Line="216" Column="98" TopLine="210"/>
       </Position28>
       <Position29>
         <Filename Value="simpleswfconvertorcode.pas"/>
-        <Caret Line="216" Column="98" TopLine="210"/>
+        <Caret Line="146" Column="2" TopLine="134"/>
       </Position29>
+      <Position30>
+        <Filename Value="simpleswfconvertorcode.pas"/>
+        <Caret Line="152" Column="11" TopLine="139"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -228,6 +233,7 @@
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="False"/>
+        <RunWithoutDebug Value="True"/>
         <UseLineInfoUnit Value="False"/>
       </Debugging>
       <LinkSmart Value="True"/>

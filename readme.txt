@@ -1,6 +1,6 @@
                                 Simple swf convertor
 
-                                  Version 1.7.6
+                                  Version 1.7.7
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -29,7 +29,7 @@ This program is distributed under the GNU GENERAL PUBLIC LICENSE.
 The source code.
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 4.2 or higher.
+It can be compiled under Lazarus 4.8 or higher.
 
 Version history.
 
@@ -57,3 +57,4 @@ Version history.
 1.7.5: The source code was recompiled under Lazarus 4.0 RC3.
 1.7.5.1: The documentation has been updated.
 1.7.6: The source code was recompiled under Lazarus 4.2.
+1.7.7: The small changes.

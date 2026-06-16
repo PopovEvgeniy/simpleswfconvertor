@@ -1,12 +1,16 @@
 unit simpleswfconvertorcode;
 
-{$mode objfpc}{$H+}
+{
+ This sofware was made by Popov Evgeniy Alekseyevich.
+ It is distributed under the GNU GENERAL PUBLIC LICENSE (Version 2 or higher).
+}
+
+{$mode objfpc}
+{$H+}
 
 interface
 
-uses
-  Classes, SysUtils, Forms, Controls, Dialogs,
-  ExtCtrls, StdCtrls, ComCtrls, LazFileUtils ,LCLIntf;
+uses Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, StdCtrls, ComCtrls, LazFileUtils ,LCLIntf;
 
 type
 
@@ -26,7 +30,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure TargetFieldChange(Sender: TObject);
   private
-    { private declarations }
+    procedure window_setup();
+    procedure dialog_setup();
+    procedure interface_setup();
+    procedure language_setup();
+    procedure setup();
   public
     { public declarations }
   end; 
@@ -34,48 +42,6 @@ type
 var MainWindow: TMainWindow;
 
 implementation
-
-procedure window_setup();
-begin
- Application.Title:='Simple swf convertor';
- MainWindow.Caption:='Simple swf convertor 1.7.6';
- MainWindow.BorderStyle:=bsDialog;
- MainWindow.Font.Name:=Screen.MenuFont.Name;
- MainWindow.Font.Size:=14;
-end;
-
-procedure dialog_setup();
-begin
- MainWindow.SelectDirectoryDialog.InitialDir:='';
- MainWindow.OpenDialog.InitialDir:='';
- MainWindow.OpenDialog.FileName:='*.swf';
- MainWindow.OpenDialog.DefaultExt:='*.swf';
- MainWindow.OpenDialog.Filter:='Adobe flash movies|*.swf';
-end;
-
-procedure interface_setup();
-begin
- MainWindow.SetButton.ShowHint:=False;
- MainWindow.ConvertButton.ShowHint:=False;
- MainWindow.ConvertButton.Enabled:=False;
- MainWindow.TargetField.Text:='';
- MainWindow.TargetField.LabelPosition:=lpLeft;
- MainWindow.TargetField.Enabled:=False;
- MainWindow.BatchCheckBox.Checked:=False;
- MainWindow.DeleteCheckBox.Checked:=False;
-end;
-
-procedure language_setup();
-begin
- MainWindow.TargetField.EditLabel.Caption:='Target';
- MainWindow.SetButton.Caption:='Set';
- MainWindow.ConvertButton.Caption:='Convert';
- MainWindow.OpenDialog.Title:='Open an Adobe flash movie';
- MainWindow.OperationStatus.SimpleText:='Please set the target';
- MainWindow.BatchCheckBox.Caption:='Batch mode';
- MainWindow.DeleteCheckBox.Caption:='Delete a source movie after conversion';
- MainWindow.SelectDirectoryDialog.Title:='Select the target directory';
-end;
 
 function get_projector(): string;
 begin
@@ -95,15 +61,6 @@ begin
 
  end;
 
-end;
-
-procedure setup();
-begin
- window_setup();
- interface_setup();
- dialog_setup();
- language_setup();
- check_projector();
 end;
 
 function compile_flash_movie(const source:string;const delete_source:boolean):boolean;
@@ -188,44 +145,95 @@ begin
  do_job:=status;
 end;
 
+procedure TMainWindow.window_setup();
+begin
+ Application.Title:='Simple swf convertor';
+ Self.Caption:='Simple swf convertor 1.7.7';
+ Self.BorderStyle:=bsDialog;
+ Self.Font.Name:=Screen.MenuFont.Name;
+ Self.Font.Size:=14;
+end;
+
+procedure TMainWindow.dialog_setup();
+begin
+ Self.SelectDirectoryDialog.InitialDir:='';
+ Self.OpenDialog.InitialDir:='';
+ Self.OpenDialog.FileName:='*.swf';
+ Self.OpenDialog.DefaultExt:='*.swf';
+ Self.OpenDialog.Filter:='Adobe flash movies|*.swf';
+end;
+
+procedure TMainWindow.interface_setup();
+begin
+ Self.SetButton.ShowHint:=False;
+ Self.ConvertButton.ShowHint:=False;
+ Self.ConvertButton.Enabled:=False;
+ Self.TargetField.Text:='';
+ Self.TargetField.LabelPosition:=lpLeft;
+ Self.TargetField.Enabled:=False;
+ Self.BatchCheckBox.Checked:=False;
+ Self.DeleteCheckBox.Checked:=False;
+end;
+
+procedure TMainWindow.language_setup();
+begin
+ Self.TargetField.EditLabel.Caption:='Target';
+ Self.SetButton.Caption:='Set';
+ Self.ConvertButton.Caption:='Convert';
+ Self.OpenDialog.Title:='Open an Adobe flash movie';
+ Self.OperationStatus.SimpleText:='Please set the target';
+ Self.BatchCheckBox.Caption:='Batch mode';
+ Self.DeleteCheckBox.Caption:='Delete a source movie after conversion';
+ Self.SelectDirectoryDialog.Title:='Select the target directory';
+end;
+
+procedure TMainWindow.setup();
+begin
+ Self.window_setup();
+ Self.interface_setup();
+ Self.dialog_setup();
+ Self.language_setup();
+end;
+
 { TMainWindow }
 
 procedure TMainWindow.FormCreate(Sender: TObject);
 begin
- setup();
+ Self.setup();
+ check_projector();
 end;
 
 procedure TMainWindow.TargetFieldChange(Sender: TObject);
 begin
- if MainWindow.TargetField.Text<>'' then
+ if Self.TargetField.Text<>'' then
  begin
-  MainWindow.ConvertButton.Enabled:=True;
-  MainWindow.OperationStatus.SimpleText:='Ready';
+  Self.ConvertButton.Enabled:=True;
+  Self.OperationStatus.SimpleText:='Ready';
  end;
 
 end;
 
 procedure TMainWindow.SetButtonClick(Sender: TObject);
 begin
- if MainWindow.BatchCheckBox.Checked=True then
+ if Self.BatchCheckBox.Checked=True then
  begin
-  if MainWindow.SelectDirectoryDialog.Execute()=True then MainWindow.TargetField.Text:=MainWindow.SelectDirectoryDialog.FileName;
+  if Self.SelectDirectoryDialog.Execute()=True then Self.TargetField.Text:=Self.SelectDirectoryDialog.FileName;
  end
  else
  begin
-  if MainWindow.OpenDialog.Execute()=True then MainWindow.TargetField.Text:=MainWindow.OpenDialog.FileName;
+  if Self.OpenDialog.Execute()=True then Self.TargetField.Text:=Self.OpenDialog.FileName;
  end;
 
 end;
 
 procedure TMainWindow.ConvertButtonClick(Sender: TObject);
 begin
-  MainWindow.OperationStatus.SimpleText:='Please wait';
-  MainWindow.SetButton.Enabled:=False;
-  MainWindow.ConvertButton.Enabled:=False;
-  MainWindow.OperationStatus.SimpleText:=do_job(MainWindow.TargetField.Text,MainWindow.BatchCheckBox.Checked,MainWindow.DeleteCheckBox.Checked);
-  MainWindow.SetButton.Enabled:=True;
-  MainWindow.ConvertButton.Enabled:=True;
+  Self.OperationStatus.SimpleText:='Please wait';
+  Self.SetButton.Enabled:=False;
+  Self.ConvertButton.Enabled:=False;
+  Self.OperationStatus.SimpleText:=do_job(Self.TargetField.Text,Self.BatchCheckBox.Checked,Self.DeleteCheckBox.Checked);
+  Self.SetButton.Enabled:=True;
+  Self.ConvertButton.Enabled:=True;
 end;
 
 {$R *.lfm}
