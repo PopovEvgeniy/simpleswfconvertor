@@ -16,19 +16,22 @@ uses Classes, SysUtils;
 
 function get_flash_projector():string;
 function compile_flash_movie(const source:string):boolean;
-function batch_compile_flash(const directory:string):LongWord;
-function run_flash_compilation(const target:string;const batch:boolean):string;
 
 implementation
 
-function is_valid_directory(var search:TSearchRec):boolean;
+procedure fast_data_copy(var source:TFileStream;var target:TFileStream);
+var buffer:Pointer;
+var amount:LongInt;
+const size=4194304;
 begin
- is_valid_directory:=((search.Attr and faDirectory)<>0) and (search.Name<>'.') and (search.Name<>'..');
-end;
-
-function is_valid_file(var search:TSearchRec):boolean;
-begin
- is_valid_file:=((search.Attr and faDirectory)=0) and (ExtractFileExt(search.Name)='.swf');
+ source.Seek(0,soFromBeginning);
+ GetMem(buffer,size);
+ while Source.Position<Source.Size do
+ begin
+  amount:=source.Read(buffer^,size);
+  if amount>0 then target.Write(buffer^,amount);
+ end;
+ Freemem(buffer);
 end;
 
 function get_flash_projector():string;
@@ -53,8 +56,8 @@ begin
   projector:=TFileStream.Create(get_flash_projector(),fmOpenRead);
   swf:=TFileStream.Create(source,fmOpenRead);
   target:=TFileStream.Create(movie,fmCreate);
-  target.CopyFrom(projector,0);
-  target.CopyFrom(swf,0);
+  fast_data_copy(projector,target);
+  fast_data_copy(swf,target);
   size:=swf.Size;
   target.WriteBuffer(signature,SizeOf(LongWord));
   target.WriteBuffer(size,SizeOf(LongWord));
@@ -66,45 +69,6 @@ begin
  if swf<>nil then swf.Free();
  if success=False then DeleteFile(movie);
  compile_flash_movie:=success;
-end;
-
-function batch_compile_flash(const directory:string):LongWord;
-var target:string;
-var amount:LongWord;
-var search:TSearchRec;
-begin
- amount:=0;
- if FindFirst(directory+DirectorySeparator+'*.*',faAnyFile,search)=0 then
- begin
-  repeat
-   target:=directory+DirectorySeparator+search.Name;
-   if is_valid_file(search)=True then
-   begin
-    if compile_flash_movie(target)=True then Inc(amount);
-   end;
-   if is_valid_directory(search)=True then
-   begin
-    amount:=amount+batch_compile_flash(target);
-   end;
-  until FindNext(search)<>0;
-  FindClose(search);
- end;
- batch_compile_flash:=amount;
-end;
-
-function run_flash_compilation(const target:string;const batch:boolean):string;
-var status:string;
-begin
- status:='The operation was successfully completed';
- if batch=False then
- begin
-  if compile_flash_movie(target)=False then status:='The operation failed';
- end
- else
- begin
-  status:='Number of the converted files: '+IntToStr(batch_compile_flash(target));
- end;
- run_flash_compilation:=status;
 end;
 
 end.

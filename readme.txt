@@ -1,6 +1,6 @@
                                 Simple SWF convertor
 
-                                  Version 1.8.6
+                                  Version 1.9.1
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -8,6 +8,7 @@ System requirements.
 
 Windows XP (Service Pack 3) or higher for 32-bit systems.
 Windows Vista or higher for 64-bit systems.
+8 megabytes of free RAM.
 
 The program description.
 
@@ -62,3 +63,8 @@ Version history.
 1.7.9-1.8.3: The small changes.
 1.8.4: A small bug has been fixed.
 1.8.5-1.8.6: The small changes.
+1.8.7: The file processing has improved.
+1.8.8: A small bug has been fixed.
+1.8.9: The small changes.
+1.9: The user interface has improved.
+1.9.1: The small changes.
