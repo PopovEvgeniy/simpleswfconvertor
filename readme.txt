@@ -1,26 +1,26 @@
-                                Simple swf convertor
+                                Simple SWF convertor
 
-                                  Version 1.7.7
+                                  Version 1.8.6
 
                          This software was made by Popov Evgeniy Alekseyevich
 
 System requirements.
 
-Windows XP (Service Pack 3) or higher for 32-bit systems
-Windows Vista or higher for 64-bit systems
+Windows XP (Service Pack 3) or higher for 32-bit systems.
+Windows Vista or higher for 64-bit systems.
 
 The program description.
 
-Simple swf convertor is a powerful tool with a simple interface.
-It lets you convert an Adobe Flash movie to a self-played movie.
+Simple SWF convertor is a powerful tool with a simple interface.
+It lets you convert an Adobe Flash movie to a standalone movie.
 A standalone movie is an executable file. It combines the built-in player and the Flash movie in one file.
 The normal mode is intended to process a single Flash movie.
 The batch mode is intended to process all Flash movies in the target directory and all subdirectories of the target directory.
 
 The additional software.
 
-You can take the Flash Player projector here: https://archive.org/details/flash-projectors
-Put it in the Simple swf convertor directory.
+You can take the Flash Player Projector here: https://archive.org/details/flash-projectors
+Put it in the Simple SWF convertor directory.
 
 License.
 
@@ -58,3 +58,7 @@ Version history.
 1.7.5.1: The documentation has been updated.
 1.7.6: The source code was recompiled under Lazarus 4.2.
 1.7.7: The small changes.
+1.7.8: The user interface has improved.
+1.7.9-1.8.3: The small changes.
+1.8.4: A small bug has been fixed.
+1.8.5-1.8.6: The small changes.
