@@ -21,7 +21,7 @@ implementation
 
 function get_flash_projector():string;
 begin
- get_flash_projector:=ExtractFilePath(ParamStr(0))+'flashplayer_32_sa.exe';
+ Result:=ExtractFilePath(ParamStr(0))+'flashplayer_32_sa.exe';
 end;
 
 function compile_flash_movie(const source:string):boolean;
@@ -38,9 +38,9 @@ begin
  size:=0;
  movie:=ChangeFileExt(source,'.exe');
  try
-  projector:=TFileStream.Create(get_flash_projector(),fmOpenRead);
-  swf:=TFileStream.Create(source,fmOpenRead);
-  target:=TFileStream.Create(movie,fmCreate);
+  projector:=TFileStream.Create(get_flash_projector(),fmOpenRead or fmShareDenyWrite);
+  swf:=TFileStream.Create(source,fmOpenRead or fmShareDenyWrite);
+  target:=TFileStream.Create(movie,fmCreate or fmShareExclusive);
   target.CopyFrom(projector,0);
   target.CopyFrom(swf,0);
   size:=swf.Size;
@@ -49,11 +49,11 @@ begin
  except
   success:=False;
  end;
- if projector<>nil then projector.Free();
  if target<>nil then target.Free();
  if swf<>nil then swf.Free();
+ if projector<>nil then projector.Free();
  if success=False then DeleteFile(movie);
- compile_flash_movie:=success;
+ Result:=success;
 end;
 
 end.

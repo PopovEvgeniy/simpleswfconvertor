@@ -57,7 +57,7 @@ end;
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='Simple SWF convertor';
- Self.Caption:='Simple SWF convertor 1.9.9';
+ Self.Caption:='Simple SWF convertor 2.0';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
