@@ -19,18 +19,13 @@ type
   TMainWindow = class(TForm)
     SetButton: TButton;
     ConvertButton: TButton;
-    BatchCheckBox: TCheckBox;
     TargetField: TLabeledEdit;
     OpenDialog: TOpenDialog;
-    SelectDirectoryDialog: TSelectDirectoryDialog;
-    OperationStatus: TStatusBar;
     procedure SetButtonClick(Sender: TObject);
     procedure ConvertButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TargetFieldChange(Sender: TObject);
   private
-    function batch_compile_flash(const directory:string):LongWord;
-    procedure run_flash_compilation(const target:string;const batch:boolean);
     procedure window_setup();
     procedure dialog_setup();
     procedure interface_setup();
@@ -43,16 +38,6 @@ type
 var MainWindow: TMainWindow;
 
 implementation
-
-function is_valid_directory(var search:TSearchRec):boolean;
-begin
- is_valid_directory:=((search.Attr and faDirectory)<>0) and (search.Name<>'.') and (search.Name<>'..');
-end;
-
-function is_valid_file(var search:TSearchRec):boolean;
-begin
- is_valid_file:=((search.Attr and faDirectory)=0) and (ExtractFileExt(search.Name)='.swf');
-end;
 
 procedure check_projector();
 var target:string;
@@ -69,56 +54,10 @@ begin
 
 end;
 
-function TMainWindow.batch_compile_flash(const directory:string):LongWord;
-var target:string;
-var amount:LongWord;
-var search:TSearchRec;
-begin
- amount:=0;
- if FindFirst(directory+DirectorySeparator+'*.*',faAnyFile,search)=0 then
- begin
-  repeat
-   target:=directory+DirectorySeparator+search.Name;
-   if is_valid_file(search)=True then
-   begin
-    if compile_flash_movie(target)=True then Inc(amount);
-    Self.OperationStatus.SimpleText:='Number of the converted files: '+IntToStr(amount);
-    Application.ProcessMessages();
-   end;
-   if is_valid_directory(search)=True then
-   begin
-    amount:=amount+Self.batch_compile_flash(target);
-   end;
-  until FindNext(search)<>0;
-  FindClose(search);
- end;
- Result:=amount;
-end;
-
-procedure TMainWindow.run_flash_compilation(const target:string;const batch:boolean);
-begin
- if batch=False then
- begin
-  if compile_flash_movie(target)=True then
-  begin
-   Self.OperationStatus.SimpleText:='The operation was successfully completed';
-  end
-  else
-  begin
-   Self.OperationStatus.SimpleText:='The operation failed';
-  end;
- end
- else
- begin
-  Self.batch_compile_flash(target);
- end;
-
-end;
-
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='Simple SWF convertor';
- Self.Caption:='Simple SWF convertor 1.9.1';
+ Self.Caption:='Simple SWF convertor 1.9.9';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -126,7 +65,6 @@ end;
 
 procedure TMainWindow.dialog_setup();
 begin
- Self.SelectDirectoryDialog.InitialDir:='';
  Self.OpenDialog.InitialDir:='';
  Self.OpenDialog.FileName:='';
  Self.OpenDialog.DefaultExt:='*.swf';
@@ -141,7 +79,6 @@ begin
  Self.TargetField.Text:='';
  Self.TargetField.LabelPosition:=lpLeft;
  Self.TargetField.Enabled:=False;
- Self.BatchCheckBox.Checked:=False;
 end;
 
 procedure TMainWindow.language_setup();
@@ -150,9 +87,6 @@ begin
  Self.SetButton.Caption:='Set';
  Self.ConvertButton.Caption:='Convert';
  Self.OpenDialog.Title:='Open an Adobe flash movie';
- Self.OperationStatus.SimpleText:='Please set the target';
- Self.BatchCheckBox.Caption:='Batch mode';
- Self.SelectDirectoryDialog.Title:='Select the target directory';
 end;
 
 procedure TMainWindow.setup();
@@ -173,27 +107,26 @@ end;
 
 procedure TMainWindow.TargetFieldChange(Sender: TObject);
 begin
- if Self.TargetField.Text<>'' then Self.ConvertButton.Enabled:=True;
+ Self.ConvertButton.Enabled:=Self.TargetField.Text<>'';
 end;
 
 procedure TMainWindow.SetButtonClick(Sender: TObject);
 begin
- if Self.BatchCheckBox.Checked=True then
- begin
-  if Self.SelectDirectoryDialog.Execute()=True then Self.TargetField.Text:=Self.SelectDirectoryDialog.FileName;
- end
- else
- begin
-  if Self.OpenDialog.Execute()=True then Self.TargetField.Text:=Self.OpenDialog.FileName;
- end;
-
+ if Self.OpenDialog.Execute()=True then Self.TargetField.Text:=Self.OpenDialog.FileName;
 end;
 
 procedure TMainWindow.ConvertButtonClick(Sender: TObject);
 begin
   Self.SetButton.Enabled:=False;
   Self.ConvertButton.Enabled:=False;
-  Self.run_flash_compilation(Self.TargetField.Text,Self.BatchCheckBox.Checked);
+  if compile_flash_movie(Self.TargetField.Text)=True then
+  begin
+   ShowMessage('The operation was successfully completed');
+  end
+  else
+  begin
+   ShowMessage('The operation failed');
+  end;
   Self.SetButton.Enabled:=True;
   Self.ConvertButton.Enabled:=True;
 end;

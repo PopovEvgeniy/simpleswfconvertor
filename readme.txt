@@ -1,6 +1,6 @@
                                 Simple SWF convertor
 
-                                  Version 1.9.1
+                                  Version 1.9.9
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -8,15 +8,12 @@ System requirements.
 
 Windows XP (Service Pack 3) or higher for 32-bit systems.
 Windows Vista or higher for 64-bit systems.
-8 megabytes of free RAM.
 
 The program description.
 
 Simple SWF convertor is a powerful tool with a simple interface.
 It lets you convert an Adobe Flash movie to a standalone movie.
 A standalone movie is an executable file. It combines the built-in player and the Flash movie in one file.
-The normal mode is intended to process a single Flash movie.
-The batch mode is intended to process all Flash movies in the target directory and all subdirectories of the target directory.
 
 The additional software.
 
@@ -68,3 +65,11 @@ Version history.
 1.8.9: The small changes.
 1.9: The user interface has improved.
 1.9.1: The small changes.
+1.9.2: The user interface has improved.
+1.9.3: The batch conversion mode has been removed.
+1.9.4: The user interface has improved.
+1.9.5: The small changes.
+1.9.6: The user interface has improved.
+1.9.7: The small changes.
+1.9.8: The memory usage has reduced.
+1.9.8: The small changes.
