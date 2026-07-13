@@ -40,10 +40,8 @@ var MainWindow: TMainWindow;
 implementation
 
 procedure check_projector();
-var target:string;
 begin
- target:=get_flash_projector();
- if FileExists(target)=False then
+ if not FileExists(get_flash_projector()) then
  begin
   if MessageDlg(Application.Title,'The Flash Player Projector was not found. Do you want to open the download page?',mtConfirmation,mbYesNo,0)=mrYes then
   begin
@@ -57,7 +55,7 @@ end;
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='Simple SWF convertor';
- Self.Caption:='Simple SWF convertor 2.0.5';
+ Self.Caption:='Simple SWF convertor 2.0.6';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -112,7 +110,7 @@ end;
 
 procedure TMainWindow.SetButtonClick(Sender: TObject);
 begin
- if Self.OpenDialog.Execute()=True then Self.TargetField.Text:=Self.OpenDialog.FileName;
+ if Self.OpenDialog.Execute() then Self.TargetField.Text:=Self.OpenDialog.FileName;
 end;
 
 procedure TMainWindow.ConvertButtonClick(Sender: TObject);

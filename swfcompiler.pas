@@ -56,7 +56,7 @@ begin
  try
   projector:=TFileStream.Create(get_flash_projector(),fmOpenRead or fmShareDenyWrite);
   swf:=TFileStream.Create(source,fmOpenRead or fmShareDenyWrite);
-  target:=TFileStream.Create(movie,fmCreate or fmShareExclusive);
+  target:=TFileStream.Create(movie,fmCreate or fmShareDenyWrite);
   fast_data_copy(projector,target);
   fast_data_copy(swf,target);
   size:=swf.Size;
@@ -68,7 +68,7 @@ begin
  if target<>nil then target.Free();
  if swf<>nil then swf.Free();
  if projector<>nil then projector.Free();
- if success=False then DeleteFile(movie);
+ if not success then DeleteFile(movie);
  Result:=success;
 end;
 
