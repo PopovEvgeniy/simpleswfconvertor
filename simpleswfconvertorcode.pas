@@ -10,7 +10,7 @@ unit simpleswfconvertorcode;
 
 interface
 
-uses Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, StdCtrls, ComCtrls, LCLIntf, swfcompiler;
+uses Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, StdCtrls, LCLIntf, swfcompiler;
 
 type
 
@@ -57,7 +57,7 @@ end;
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='Simple SWF convertor';
- Self.Caption:='Simple SWF convertor 2.0.4';
+ Self.Caption:='Simple SWF convertor 2.0.5';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
