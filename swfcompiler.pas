@@ -19,6 +19,22 @@ function compile_flash_movie(const source:string):boolean;
 
 implementation
 
+var buffer:Pointer;
+
+procedure fast_data_copy(var source:TFileStream;var target:TFileStream);
+var amount:LongInt;
+const size=1048576;
+begin
+ source.Seek(0,soFromBeginning);
+ if buffer=nil then GetMem(buffer,size);
+ while Source.Position<Source.Size do
+ begin
+  amount:=source.Read(buffer^,size);
+  if amount>0 then target.Write(buffer^,amount);
+ end;
+
+end;
+
 function get_flash_projector():string;
 begin
  Result:=ExtractFilePath(ParamStr(0))+'flashplayer_32_sa.exe';
@@ -41,8 +57,8 @@ begin
   projector:=TFileStream.Create(get_flash_projector(),fmOpenRead or fmShareDenyWrite);
   swf:=TFileStream.Create(source,fmOpenRead or fmShareDenyWrite);
   target:=TFileStream.Create(movie,fmCreate or fmShareExclusive);
-  target.CopyFrom(projector,0);
-  target.CopyFrom(swf,0);
+  fast_data_copy(projector,target);
+  fast_data_copy(swf,target);
   size:=swf.Size;
   target.Write(signature,SizeOf(LongWord));
   target.Write(size,SizeOf(LongWord));
@@ -55,5 +71,13 @@ begin
  if success=False then DeleteFile(movie);
  Result:=success;
 end;
+
+Initialization
+ buffer:=nil;
+end.
+
+Finalization
+ if buffer<>nil then Freemem(buffer);
+end.
 
 end.

@@ -1,6 +1,6 @@
                                 Simple SWF convertor
 
-                                  Version 2.0
+                                  Version 2.0.4
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -73,3 +73,6 @@ Version history.
 1.9.7: The small changes.
 1.9.8: The memory usage has reduced.
 1.9.9-2.0: The small changes.
+2.0.1: The file processing has improved.
+2.0.2-2.0.3: The small changes.
+2.0.4: A small bug has been fixed.
